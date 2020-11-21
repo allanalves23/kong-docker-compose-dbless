@@ -1,0 +1,16 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+- name: master-api
+  url: https://api.codermind.com.br/master
+  routes:
+  - name: codermind
+    paths:
+    - /master
+- name: tcc-api
+  url: https://tcc-api.azurewebsites.net/
+  routes:
+  - name: tcc
+    paths:
+    - /tcc-api
