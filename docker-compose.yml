@@ -1,0 +1,30 @@
+version: '3.1'
+
+services: 
+  kong:
+      container_name: kong-api-management
+      build: .
+      restart: always
+      environment:
+          - KONG_DATABASE=off
+          - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
+          - KONG_PROXY_ACCESS_LOG=/dev/stdout
+          - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+          - KONG_PROXY_ERROR_LOG=/dev/stderr
+          - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      ports: 
+        - "8000:8000"
+        - "8443:8443"
+        - "8001:8001"
+        - "8444:8444"
+      networks: 
+        - kong-net
+      volumes:
+            - kong-vol:/usr/local/kong/declarative
+
+networks: 
+  kong-net:
+    driver: bridge
+
+volumes:
+    kong-vol:
